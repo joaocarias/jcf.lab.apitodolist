@@ -12,16 +12,11 @@ import br.com.todolist.todolist.repositories.TodoRepository;
 public class TodoService {
     private TodoRepository todoRepository;
 
-    public TodoService(TodoRepository todoRepository){
+    public TodoService (TodoRepository todoRepository){
         this.todoRepository = todoRepository;
     }
 
     public List<Todo> create(Todo todo){
-        todoRepository.save(todo);
-        return list();
-    }
-
-    public List<Todo> update(Todo todo){
         todoRepository.save(todo);
         return list();
     }
@@ -32,8 +27,14 @@ public class TodoService {
         return todoRepository.findAll(sort);
     }
 
-    public List<Todo> delete(Long id){
+    public List<Todo> update(Todo todo){
+        todoRepository.save(todo);
+        return list();
+    }
+
+    public List<Todo> delete(long id){
         todoRepository.deleteById(id);
         return list();
     }
+
 }

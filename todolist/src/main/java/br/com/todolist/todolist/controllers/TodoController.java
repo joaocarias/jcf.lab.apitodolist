@@ -1,9 +1,5 @@
 package br.com.todolist.todolist.controllers;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import br.com.todolist.todolist.entities.Todo;
-import br.com.todolist.todolist.services.TodoService;
 
 import java.util.List;
 
@@ -14,29 +10,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.todolist.todolist.entities.Todo;
+import br.com.todolist.todolist.services.TodoService;
 
 @RestController
 @RequestMapping("/todos")
-public class TodoContoller {
+public class TodoController {
     private TodoService todoService;
 
-    public TodoContoller(TodoService todoService){
+    public TodoController(@RequestBody TodoService todoService) {
         this.todoService = todoService;
     }
 
     @PostMapping
-    List<Todo> create(@RequestBody Todo todo){
+    List<Todo> create(Todo todo){
         return todoService.create(todo);
-    }
-    
-    @GetMapping
-    List<Todo> list(){
-        return todoService.list();
     }
 
     @PutMapping
     List<Todo> update(@RequestBody Todo todo){
         return todoService.update(todo);
+    }
+
+    @GetMapping
+    List<Todo> list(){
+        return todoService.list();
     }
 
     @DeleteMapping("{id}")
